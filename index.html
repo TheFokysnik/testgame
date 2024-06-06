@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creation</title>
+</head>
+<body>
+    <h1>Create Your Character</h1>
+    <form id="character-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br><br>
+
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+            <option value="warrior">Warrior</option>
+            <option value="mage">Mage</option>
+            <option value="archer">Archer</option>
+        </select><br><br>
+
+        <button type="submit">Create Character</button>
+    </form>
+
+    <script>
+        document.getElementById('character-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const className = document.getElementById('class').value;
+
+            const data = {
+                name: name,
+                gender: gender,
+                class: className
+            };
+
+            Telegram.WebApp.sendData(JSON.stringify(data));
+        });
+    </script>
+</body>
+</html>
